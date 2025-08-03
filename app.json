@@ -1,20 +1,25 @@
 {
   "expo": {
-    "name": "qadam-mobile",
-    "slug": "qadam-mobile",
+    "name": "Qadam",
+    "slug": "Qadam",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "qadammobile",
+    "scheme": "Qadam",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "icon": {
+        "dark": "./assets/images/icon.png",
+        "light": "./assets/images/icon.png",
+        "tinted": "./assets/images/icon.png"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#2A2F35"
       },
       "edgeToEdgeEnabled": true
     },
@@ -31,9 +36,10 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#2A2F35"
         }
-      ]
+      ],
+      "expo-localization"
     ],
     "experiments": {
       "typedRoutes": true
