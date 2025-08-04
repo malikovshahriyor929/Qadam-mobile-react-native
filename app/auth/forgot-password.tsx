@@ -80,7 +80,7 @@ const ForgotPassword = () => {
               }}
             >
               <View className="absolute" style={{
-                top: 40, left: 20
+                top: 50, left: 20
               }}>
                 <Link href={"/auth/login"}>
                   <Text>

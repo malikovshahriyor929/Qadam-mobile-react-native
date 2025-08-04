@@ -1,80 +1,97 @@
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
+// import * as Location from "expo-location";
+// import { Alert } from "react-native";
 
-// Define PermissionState type for TypeScript
-type PermissionState = "granted" | "denied" | "prompt";
+// interface Props {
+//   setLocation: React.Dispatch<
+//     React.SetStateAction<{ latitude: number; longitude: number } | null>
+//   >;
+// }
 
-interface props {
+// const LocationTracker = ({ setLocation }: Props) => {
+//   const [, setError] = useState<string | null>(null);
+
+//   useEffect(() => {
+//     (async () => {
+//       try {
+//         const { status } = await Location.requestForegroundPermissionsAsync();
+//         if (status !== "granted") {
+//           setError("Permission to access location was denied");
+//           Alert.alert("Location Permission", "Access denied.");
+//           return;
+//         }
+
+//         const location = await Location.getCurrentPositionAsync({
+//           accuracy: Location.Accuracy.High,
+//         });
+
+//         setLocation({
+//           latitude: location.coords.latitude,
+//           longitude: location.coords.longitude,
+//         });
+//       } catch (error) {
+//         setError("Failed to get location");
+//       }
+//     })();
+//   }, [setLocation]);
+
+//   return null;
+// };
+
+// export default LocationTracker;
+
+
+import React, { useEffect, useState, useCallback } from "react";
+import * as Location from "expo-location";
+import { Alert, AppState, AppStateStatus } from "react-native";
+
+interface Props {
   setLocation: React.Dispatch<
     React.SetStateAction<{ latitude: number; longitude: number } | null>
   >;
 }
 
-const LocationTracker = ({ setLocation }: props) => {
+const LocationTracker = ({ setLocation }: Props) => {
   const [, setError] = useState<string | null>(null);
-  const [permissionStatus, setPermissionStatus] =
-    useState<PermissionState>("prompt");
 
-  // Check permission on mount
-  useEffect(() => {
-    if (!("geolocation" in navigator)) {
-      setError("Geolocation is not supported by your browser.");
-      return;
-    }
-
-    const checkPermission = async () => {
-      try {
-        const status = await navigator.permissions?.query({
-          name: "geolocation",
-        } as PermissionDescriptor & { name: "geolocation" });
-        if (status) {
-          setPermissionStatus(status.state as PermissionState);
-          status.onchange = () => {
-            setPermissionStatus(status.state as PermissionState);
-          };
-        } else {
-          setPermissionStatus("prompt");
-        }
-      } catch {
-        setPermissionStatus("prompt");
+  const getLocation = useCallback(async () => {
+    try {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setError("Permission to access location was denied");
+        Alert.alert("Location Permission", "Access denied.");
+        return;
       }
-    };
 
-    checkPermission();
-  }, []);
+      const location = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.High,
+      });
 
-  // Request location when permissionStatus changes
-  useEffect(() => {
-    if (permissionStatus === "granted" || permissionStatus === "prompt") {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLocation({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          });
-        },
-        (error) => {
-          switch (error.code) {
-            case error.PERMISSION_DENIED:
-              setError(
-                "Location access was denied. Please enable it in your browser settings."
-              );
-              break;
-            case error.POSITION_UNAVAILABLE:
-              setError("Location information is unavailable.");
-              break;
-            case error.TIMEOUT:
-              setError("Location request timed out.");
-              break;
-            default:
-              setError("An unknown error occurred.");
-          }
-        },
-        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
-      );
+      setLocation({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      });
+      setError(null);
+    } catch {
+      setError("Failed to get location");
     }
-  }, [permissionStatus, setLocation]);
+  }, [setLocation]);
 
-  return <></>;
+  useEffect(() => {
+    getLocation()
+    const subscription = AppState.addEventListener(
+      "change",
+      (nextAppState: AppStateStatus) => {
+        if (nextAppState === "active") {
+          getLocation()
+        }
+      }
+    );
+
+    return () => subscription.remove();
+  }, [getLocation]);
+
+  return null;
 };
 
 export default LocationTracker;

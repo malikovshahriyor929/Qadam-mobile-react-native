@@ -24,13 +24,11 @@ const GymPodCard: React.FC<HallType> = ({
   address_eng,
   address_ru,
   address_uz,
-  created_at,
   images,
   distance,
   averageRate,
   connected,
   bookedSessions,
-  availability,
 }) => {
   const { pathname } = useLocalSearchParams();
   interface Availability {
@@ -65,10 +63,10 @@ const GymPodCard: React.FC<HallType> = ({
   );
   return (
     <>
-      <Link href={ `${connected ? `/app/(tabs)/gym/${id}` : pathname}` as any }>
-        <View className="relative ">
+      <Link href={ `${connected ? `(tabs)/explore/gym/${id}` : pathname}` as any }>
+        <View className="relative shadow-lg bg-white p-3  rounded-2xl ">
           <View
-            className={ `gym-card mb-4 border-none shadow-md
+            className={ ` border-none shadow-md
           
             `}
           >
@@ -89,8 +87,8 @@ const GymPodCard: React.FC<HallType> = ({
                 </View>
               ) }
               { distance && (
-                <View className="absolute top-2 right-2 bg-white/80 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-medium">
-                  <Text>
+                <View className="absolute top-2 right-2 bg-white/80 backdrop-blur-sm px-2 py-1 rounded-full">
+                  <Text className=" text-xs font-medium">
                     { Number(distance) >= 1000
                       ? `${(Number(distance) / 1000).toFixed(1)} km`
                       : `${Number(distance).toFixed(0)} m` }
@@ -99,16 +97,16 @@ const GymPodCard: React.FC<HallType> = ({
               ) }
             </View>
             <View >
-              <Text className="font-semibold text-lg">
+              <Text className="font-semibold text-xl mb-1 truncate w-[95%] line-clamp-1">
                 { MembershipName({
                   name_eng: name_eng,
                   name_ru: name_ru,
                   name_uz: name_uz,
                 }) }
               </Text>
-              <View className="flex-row items-center text-muted-foreground text-sm my-1">
-                <MapPin className="w-3.5 h-3.5 mr-1" />
-                <Text>
+              <View className="flex-row items-center *:text-[#71717a] text-sm gap-1 ">
+                <MapPin size={ 17 } color={ "#71717a" } />
+                <Text className=" truncate w-[80%] line-clamp-1 text-[#71717a]" >
                   { MembershipName({
                     name_eng: address_eng,
                     name_ru: address_ru,
@@ -117,13 +115,13 @@ const GymPodCard: React.FC<HallType> = ({
                 </Text>
               </View>
               <View className="flex-row justify-between items-center mt-2">
-                <View className="flex-row gap-1 items-center text-sm text-muted-foreground">
-                  <Clock className="w-3.5 h-3.5 mr-1" />
-                  <Text>{ formatted }</Text>
+                <View className="flex-row gap-1 items-center text-sm ">
+                  <Clock size={ 17 } color={ "#71717a" } />
+                  <Text className="text-[#71717a]">{ formatted }</Text>
                 </View>
-                <View className="flex-row items-center text-sm text-muted-foreground">
-                  <Star fill={ "#eab308" } className="w-3.5 h-3.5 mr-1 text-yellow-500" />
-                  <Text>{ averageRate === 0 ? 5 : averageRate.toFixed(1) } </Text>
+                <View className="flex-row items-center text-sm gap-1 ">
+                  <Star fill={ "#eab308" } color={ "#eab308" } size={ 16 } className="w-3.5 h-3.5  !text-yellow-500" />
+                  <Text className="text-[#71717a]">{ averageRate === 0 ? 5 : averageRate.toFixed(1) } </Text>
                 </View>
               </View>
             </View>

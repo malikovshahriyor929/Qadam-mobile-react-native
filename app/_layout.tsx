@@ -30,7 +30,7 @@ export default function RootLayout() {
 
   if (!isReady)
     return (
-      <View className="flex items-center justify-center h-full w-full animate-spin ">
+      <View className="flex items-center justify-center h-screen w-full animate-spin ">
         <Loader2 size={ 40 } color={ "#2A2F35" } />
       </View>
     )
@@ -46,6 +46,7 @@ export default function RootLayout() {
               <Stack >
                 <Stack.Screen name="(tabs)" options={ { headerShown: false } } />
                 <Stack.Screen name="auth" options={ { headerShown: false } } />
+                <Stack.Screen name="pages" options={ { headerShown: false } } />
               </Stack >
               <Toast config={ toastConfig } />
             </SafeAreaProvider>

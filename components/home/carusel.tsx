@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text, Image, Dimensions,ActivityIndicator } from "react-native";
+import { View, Text, Image, Dimensions } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import { useTranslation } from "react-i18next";
 import { Myasxios } from "@/shared/generics";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useQuery } from "@tanstack/react-query";
+import { GymPodCardSkeleton } from "../location/gymPodCard/skeleton";
 
 const { width } = Dimensions.get("window");
 type CarouselItem = {
@@ -45,8 +46,10 @@ export default function CarouselWithLanguage() {
 
   if (isLoading || !data) {
     return (
-      <View style={ { height: 240, justifyContent: "center", alignItems: "center" } }>
-        <ActivityIndicator size="large" />
+      <View
+        className="w-full mt-4 "
+      >
+        <GymPodCardSkeleton />
       </View>
     );
   }
@@ -59,7 +62,7 @@ export default function CarouselWithLanguage() {
       data={ data }
       scrollAnimationDuration={ 1000 }
       autoPlayInterval={ 3000 }
-      style={ { alignSelf: "center", display: data.length > 0 ? "flex" : "none" } }
+      style={ { alignSelf: "center", display: data?.length > 0 ? "flex" : "none" } }
       renderItem={ ({ item }: { item: CarouselItem }) => (
         <View
           style={ {

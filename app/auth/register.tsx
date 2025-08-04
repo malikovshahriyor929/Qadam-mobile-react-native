@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {  z } from "zod";
+import { z } from "zod";
 import { Trans, useTranslation } from "react-i18next";
 
 import { Myasxios } from "@/shared/generics";
 import { registerSchema } from "@/utils/schemas";
-import { ArrowLeft, CheckIcon, Eye,  EyeOff } from "lucide-react-native";
+import { ArrowLeft, CheckIcon, Eye, EyeOff } from "lucide-react-native";
 import { Link, useRouter } from "expo-router";
 import Toast from "react-native-toast-message";
 import { isAxiosError } from "axios";
-import {  Keyboard, KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, TouchableWithoutFeedback, View } from "react-native";
+import { Keyboard, KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, TouchableWithoutFeedback, View } from "react-native";
 import { Checkbox, Input, Label, XStack } from "tamagui";
 // Zod schema for validation
 
@@ -102,22 +102,22 @@ const SignUp: React.FC = () => {
   };
   return (
     <View className="relative min-h-screen">
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+      <TouchableWithoutFeedback onPress={ Keyboard.dismiss } >
         <KeyboardAvoidingView
-          style={{ flex: 1, backgroundColor: "#fff" }}
-          behavior={Platform.OS === "ios" ? "padding" : "padding"}
-          keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
+          style={ { flex: 1, backgroundColor: "#fff" } }
+          behavior={ Platform.OS === "ios" ? "padding" : "padding" }
+          keyboardVerticalOffset={ Platform.OS === "ios" ? 60 : 0 }
         >
           <ScrollView
             keyboardShouldPersistTaps="handled"
-            contentContainerStyle={{
+            contentContainerStyle={ {
               flexGrow: 1,
-            }}
+            } }
           >
-            <View className="absolute" style={{
-              top: 40, left: 20
-            }}>
-              <Link href={"/auth/login"}>
+            <View className="absolute" style={ {
+              top: 50, left: 20
+            } }>
+              <Link href={ "/auth/login" }>
                 <Text>
                   <ArrowLeft />
                 </Text>
@@ -126,31 +126,31 @@ const SignUp: React.FC = () => {
             <View className="flex-1 flex  justify-center px-6 mb-6 ">
               <View className="sm:mx-auto sm:w-full sm:max-w-sm mb-6">
                 <Text className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
-                  {t("signup.title")}
+                  { t("signup.title") }
                 </Text>
               </View>
 
               <View className="mb-6">
                 <View className="mt-2">
                   <Controller
-                    control={control}
+                    control={ control }
                     name="firstName"
-                    rules={{ required: true }}
-                    render={({ field: { value, onChange } }) => (
+                    rules={ { required: true } }
+                    render={ ({ field: { value, onChange } }) => (
                       <View>
-                        <Text className="text-base font-semibold mb-1">{t("signup.firstName")}</Text>
+                        <Text className="text-base font-semibold mb-1">{ t("signup.firstName") }</Text>
                         <Input
-                          placeholder={t("signup.firstNamePlaceholder")}
-                          value={value}
-                          onChangeText={onChange}
-                          aria-invalid={!!errors.firstName}
+                          placeholder={ t("signup.firstNamePlaceholder") }
+                          value={ value }
+                          onChangeText={ onChange }
+                          aria-invalid={ !!errors.firstName }
                           aria-describedby="firstName-error"
                         />
-                        {errors.firstName && (
-                          <Text className="text-red-500 mt-1">{errors.firstName.message}</Text>
-                        )}
+                        { errors.firstName && (
+                          <Text className="text-red-500 mt-1">{ errors.firstName.message }</Text>
+                        ) }
                       </View>
-                    )}
+                    ) }
                   />
                 </View>
               </View>
@@ -158,24 +158,24 @@ const SignUp: React.FC = () => {
               <View className="mb-6">
                 <View className="mt-2">
                   <Controller
-                    control={control}
+                    control={ control }
                     name="lastName"
-                    rules={{ required: true }}
-                    render={({ field: { value, onChange } }) => (
+                    rules={ { required: true } }
+                    render={ ({ field: { value, onChange } }) => (
                       <View>
-                        <Text className="text-base font-semibold mb-1">{t("signup.lastName")}</Text>
+                        <Text className="text-base font-semibold mb-1">{ t("signup.lastName") }</Text>
                         <Input
-                          placeholder={t("signup.lastNamePlaceholder")}
-                          value={value}
-                          onChangeText={onChange}
-                          aria-invalid={!!errors.lastName}
+                          placeholder={ t("signup.lastNamePlaceholder") }
+                          value={ value }
+                          onChangeText={ onChange }
+                          aria-invalid={ !!errors.lastName }
                           aria-describedby="lastName-error"
                         />
-                        {errors.lastName && (
-                          <Text className="text-red-500 mt-1">{errors.lastName.message}</Text>
-                        )}
+                        { errors.lastName && (
+                          <Text className="text-red-500 mt-1">{ errors.lastName.message }</Text>
+                        ) }
                       </View>
-                    )}
+                    ) }
                   />
                 </View>
               </View>
@@ -183,25 +183,25 @@ const SignUp: React.FC = () => {
               <View className="mb-6">
                 <View className="mt-2">
                   <Controller
-                    control={control}
+                    control={ control }
                     name="phoneNumber"
-                    rules={{ required: true }}
-                    render={({ field: { value } }) => (
+                    rules={ { required: true } }
+                    render={ ({ field: { value } }) => (
                       <View>
-                        <Text className="text-base font-semibold mb-1">{t("signup.phoneNumber")}</Text>
+                        <Text className="text-base font-semibold mb-1">{ t("signup.phoneNumber") }</Text>
                         <Input
-                          placeholder={t("signup.phoneNumberPlaceholder")}
-                          value={value}
-                          onChangeText={handlePhoneChange}
-                          aria-invalid={!!errors.phoneNumber}
+                          placeholder={ t("signup.phoneNumberPlaceholder") }
+                          value={ value }
+                          onChangeText={ handlePhoneChange }
+                          aria-invalid={ !!errors.phoneNumber }
                           aria-describedby="phoneNumber-error"
                           defaultValue="+998"
                         />
-                        {errors.lastName && (
-                          <Text className="text-red-500 mt-1">{errors.lastName.message}</Text>
-                        )}
+                        { errors.lastName && (
+                          <Text className="text-red-500 mt-1">{ errors.lastName.message }</Text>
+                        ) }
                       </View>
-                    )}
+                    ) }
                   />
                 </View>
               </View>
@@ -210,39 +210,39 @@ const SignUp: React.FC = () => {
                 <View className="mt-2">
                   <View className="relative w-full ">
                     <Controller
-                      control={control}
+                      control={ control }
                       name="password"
-                      rules={{ required: true }}
-                      render={({ field: { value, onChange } }) => (
+                      rules={ { required: true } }
+                      render={ ({ field: { value, onChange } }) => (
                         <View>
-                          <Text className="text-base font-semibold mb-1">{t("signup.password")}</Text>
+                          <Text className="text-base font-semibold mb-1">{ t("signup.password") }</Text>
                           <View>
                             <Input
-                              placeholder={t("signup.passwordPlaceholder")}
-                              value={value}
-                              onChangeText={onChange}
-                              aria-invalid={!!errors.password}
-                              secureTextEntry={eye}
+                              placeholder={ t("signup.passwordPlaceholder") }
+                              value={ value }
+                              onChangeText={ onChange }
+                              aria-invalid={ !!errors.password }
+                              secureTextEntry={ eye }
                               aria-describedby="password-error"
-                              editable={!isSubmitting}
-                              pr={15}
+                              editable={ !isSubmitting }
+                              pr={ 15 }
                             />
                             <XStack
                               position="absolute"
-                              right={15}
-                              top={12}
-                              onPress={() => seteye(!eye)}
+                              right={ 15 }
+                              top={ 12 }
+                              onPress={ () => seteye(!eye) }
                             >
                               <View>
-                                {eye ? <EyeOff size={20} /> : <Eye size={20} />}
+                                { eye ? <EyeOff size={ 20 } /> : <Eye size={ 20 } /> }
                               </View>
                             </XStack>
                           </View>
-                          {errors.lastName && (
-                            <Text className="text-red-500 mt-1">{errors.lastName.message}</Text>
-                          )}
+                          { errors.lastName && (
+                            <Text className="text-red-500 mt-1">{ errors.lastName.message }</Text>
+                          ) }
                         </View>
-                      )}
+                      ) }
                     />
                   </View>
                 </View>
@@ -252,38 +252,38 @@ const SignUp: React.FC = () => {
                 <View className="mt-2">
                   <View className="relative w-full ">
                     <Controller
-                      control={control}
+                      control={ control }
                       name="confirmPassword"
-                      rules={{ required: true }}
-                      render={({ field: { value, onChange } }) =>
+                      rules={ { required: true } }
+                      render={ ({ field: { value, onChange } }) =>
                         <View >
-                          <Text className="text-base font-semibold mb-1">{t("signup.confirmPassword")}</Text>
+                          <Text className="text-base font-semibold mb-1">{ t("signup.confirmPassword") }</Text>
                           <View className="relative">
                             <Input
                               className="border border-gray-300 rounded-md p-3 text-base"
-                              secureTextEntry={eyecom}
-                              placeholder={t("signup.confirmPasswordPlaceholder")}
-                              value={value}
-                              onChangeText={onChange}
-                              editable={!isSubmitting}
-                              aria-invalid={!!errors.confirmPassword}
+                              secureTextEntry={ eyecom }
+                              placeholder={ t("signup.confirmPasswordPlaceholder") }
+                              value={ value }
+                              onChangeText={ onChange }
+                              editable={ !isSubmitting }
+                              aria-invalid={ !!errors.confirmPassword }
                               aria-describedby="confirmPassword-error"
                             />
                             <XStack
                               position="absolute"
-                              right={15}
-                              top={12}
-                              onPress={() => seteyeCom(!eyecom)}
+                              right={ 15 }
+                              top={ 12 }
+                              onPress={ () => seteyeCom(!eyecom) }
                             >
                               <View>
-                                {eyecom ? <EyeOff size={20} /> : <Eye size={20} />}
+                                { eyecom ? <EyeOff size={ 20 } /> : <Eye size={ 20 } /> }
                               </View>
                             </XStack>
                           </View>
                           <View>
-                            {errors.confirmPassword && (
-                              <Text className="text-red-500 mt-1">{errors.confirmPassword.message}</Text>
-                            )}
+                            { errors.confirmPassword && (
+                              <Text className="text-red-500 mt-1">{ errors.confirmPassword.message }</Text>
+                            ) }
                           </View>
                         </View>
                       }
@@ -291,41 +291,39 @@ const SignUp: React.FC = () => {
                   </View>
                 </View>
               </View>
-              <View className="flex-row items-center">
-                <Checkbox checked={checked} onCheckedChange={(val) => setChecked(val)}>
+              <View className="flex-row items-center gap-3">
+                <Checkbox checked={ checked } onCheckedChange={ (val) => setChecked(val) }>
                   <Checkbox.Indicator>
                     <CheckIcon />
                   </Checkbox.Indicator>
                 </Checkbox>
                 <Label htmlFor="terms">
-                  <Text className=" font-medium ">
+                  <Text className=" font-medium text-[14px] leading-5 ">
                     <Trans
-                      className="gap-0"
                       i18nKey="terms.agree"
-                      components={{
+                      components={ {
                         1: (
                           <Link
                             href="/auth/term"
                             className="text-blue-500 underline"
                           >
-                            {/* matn i18next ichida bo‘ladi */}
                           </Link>
                         ),
-                      }}
+                      } }
                     />
                   </Text>
                 </Label>
               </View>
               <View className="mt-6">
                 <Pressable
-                  onPress={handleSubmit(onSubmit)}
+                  onPress={ handleSubmit(onSubmit) }
                   className="bg-primary  hover:bg-primary/90 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[10px] text-sm font-medium  px-4 py-4"
-                  disabled={isSubmitting}
+                  disabled={ isSubmitting }
                 >
                   <Text className="text-primary-foreground font-bold">
-                    {isSubmitting
+                    { isSubmitting
                       ? t("signup.signingUpButton")
-                      : t("signup.signUpButton")}
+                      : t("signup.signUpButton") }
                   </Text>
                 </Pressable>
               </View>

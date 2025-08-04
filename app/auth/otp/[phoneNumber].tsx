@@ -6,8 +6,9 @@ import { router, useLocalSearchParams } from "expo-router";
 import { ArrowLeft } from "lucide-react-native";
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Pressable, Text, TextInput, View } from "react-native";
+import { Keyboard, KeyboardAvoidingView, Platform, Pressable, Text, TextInput, TouchableWithoutFeedback, View } from "react-native";
 import Toast from "react-native-toast-message";
+import { ScrollView } from "tamagui";
 
 const Otp = () => {
   const [otp, setOtp] = useState("");
@@ -24,9 +25,9 @@ const Otp = () => {
     setIsLoading(true);
     try {
       const response = await Myasxios.post("/auth/verify-phone", {
-        phoneNumber: phoneNumber,
+        phoneNumber: phoneNumber.slice(12),
         code: otp,
-      });
+      })
 
       if (response.status === 200) {
         Toast.show({
@@ -84,7 +85,9 @@ const Otp = () => {
     if (!canResend) return;
 
     try {
-      await Myasxios.post("/auth/resend-code", { phoneNumber });
+      await Myasxios.post("/auth/resend-code", {
+        phoneNumber: phoneNumber.slice(12)
+      });
       Toast.show({
         type: "error",
         text1: t("toast.otpResent")
@@ -115,96 +118,109 @@ const Otp = () => {
   };
   const otpArray = otp.split('');
   return (
-    <>
-      <View className="relative  flex flex-col h-[calc(100vh-10rem)]">
-        <View className="flex-1 flex flex-col justify-center px-6 py-12">
-          <View className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <Text className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
-              {t("otp.title")}
-            </Text>
-          </View>
+    <View className="relative h-screen w-full ">
+      <TouchableWithoutFeedback onPress={ Keyboard.dismiss } >
+        <KeyboardAvoidingView
+          style={ { flex: 1, backgroundColor: "#fff" } }
+          behavior={ Platform.OS === "ios" ? "padding" : "padding" }
+          keyboardVerticalOffset={ Platform.OS === "ios" ? 60 : 0 }
+        >
+          <ScrollView
+            keyboardShouldPersistTaps="handled"
+            contentContainerStyle={ {
+              flexGrow: 1,
+            } }
+          >
+            <View className="  flex flex-col h-full bg-white">
+              <View className="flex-1 flex flex-col justify-center px-6 py-12">
+                <View className="sm:mx-auto sm:w-full sm:max-w-sm">
+                  <Text className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
+                    { t("otp.title") }
+                  </Text>
+                </View>
 
-          <View className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <View>
-              <View className="space-y-6">
-                <View>
-                  <View>
-                    <View className="flex items-center justify-between gap-3 flex-row mb-3 ">
+                <View className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+                  <View className="space-y-6">
+                    <View>
                       <View>
-                        <Text className="block font-medium text-gray-700">
-                          {t("verificationCode")}
-                        </Text>
-                      </View>
-                      {canResend ? (
-                        <Pressable
-                          onPress={resendOTP}
-                          className="text-primary text-sm font-medium leading-6 hover:underline"
-                        >
+                        <View className="flex items-center justify-between gap-3 flex-row mb-3 ">
                           <View>
-                            <Text>
-                              {t("resendOtp")}
+                            <Text className="block font-medium text-gray-700">
+                              { t("verificationCode") }
                             </Text>
                           </View>
-                        </Pressable>
-                      ) : (
-                        <View>
-                          <Text className="text-muted-foreground ">
-                            {timer}s {t("resendOtp")}
-                          </Text>
+                          { canResend ? (
+                            <Pressable
+                              onPress={ resendOTP }
+                              className="text-primary text-sm font-medium leading-6 hover:underline"
+                            >
+                              <View>
+                                <Text>
+                                  { t("resendOtp") }
+                                </Text>
+                              </View>
+                            </Pressable>
+                          ) : (
+                            <View>
+                              <Text className="text-muted-foreground ">
+                                { timer }s { t("resendOtp") }
+                              </Text>
+                            </View>
+                          ) }
                         </View>
-                      )}
+                        <View className="flex-row justify-between gap-3  " style={ { marginTop: 10 } }>
+                          { [0, 1, 2, 3].map((index) => (
+                            <TextInput
+                              key={ index }
+                              ref={ (ref) => { inputRefs.current[index] = ref!; } }
+                              className="border  border-gray-300 text-xl text-center rounded-[20px]"
+                              maxLength={ 1 }
+                              style={ { height: 56, width: "20%", borderRadius: 12 } }
+                              keyboardType="number-pad"
+                              value={ otpArray[index] || '' }
+                              onChangeText={ (text) => handleOtpChange(text, index) }
+                              onKeyPress={ (e) => handleKeyPress(e, index) }
+                            />
+                          )) }
+                        </View>
+                      </View>
                     </View>
-                    <View className="flex-row justify-between gap-3  " style={{ marginTop: 10 }}>
-                      {[0, 1, 2, 3].map((index) => (
-                        <TextInput
-                          key={index}
-                          ref={(ref) => { inputRefs.current[index] = ref!; }}
-                          className="border  border-gray-300 text-xl text-center rounded-[20px]"
-                          maxLength={1}
-                          style={{ height: 56, width: "20%", borderRadius: 12 }}
-                          keyboardType="number-pad"
-                          value={otpArray[index] || ''}
-                          onChangeText={(text) => handleOtpChange(text, index)}
-                          onKeyPress={(e) => handleKeyPress(e, index)}
-                        />
-                      ))}
+                    <View className="mt-5">
+                      <Pressable
+                        onPress={ handleLogin }
+                        className="w-full bg-primary  hover:bg-primary/90 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[10px] text-sm font-medium  px-4 py-4  "
+                        disabled={ isLoading }
+                      >
+                        <Text className="text-primary-foreground font-bold"> { isLoading ? t("otp.signingIn") : t("otp.signin") }</Text>
+                      </Pressable>
                     </View>
                   </View>
-                </View>
-                <View>
-                  <Pressable
-                    onPress={handleLogin}
-                    className="w-full"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? t("otp.signingIn") : t("otp.signin")}
-                  </Pressable>
-                </View>
-              </View>
-            </View>
-            {/* <View>
+                  {/* <View>
                 <Button type="submit" className="w-full" disabled={isLoading}>
                   {isLoading ? t("otp.signingIn") : t("otp.signin")}
                 </Button>
               </View> */}
 
-            <View className="mt-10 text-center text-sm text-muted-foreground">
-              <Pressable
-                onPress={navigateToSignup}
-                className="font-semibold leading-6 text-gym-500 hover:text-gym-400"
-              >
-                <Text>
-                  {t("otp.signup")}
-                </Text>
+                  <View className="mt-10  text-sm text-muted-foreground">
+                    <Pressable
+                      onPress={ navigateToSignup }
+                      className=""
+                    >
+                      <Text className="font-semibold text-center  leading-6 !text-primary hover:text-gym-400">
+                        { t("otp.signup") }
+                      </Text>
+                    </Pressable>
+                  </View>
+                </View>
+              </View>
+              <Pressable onPress={ () => goBack() } className="absolute top-6 left-5 ">
+                <ArrowLeft />
               </Pressable>
             </View>
-          </View>
-        </View>
-        <Pressable onPress={() => goBack()} className="absolute top-4 left-4 ">
-          <ArrowLeft />
-        </Pressable>
-      </View>
-    </>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </TouchableWithoutFeedback >
+    </View>
   );
 };
 

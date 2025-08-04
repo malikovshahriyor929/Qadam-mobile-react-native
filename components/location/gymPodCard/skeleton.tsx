@@ -1,23 +1,27 @@
 import React from "react";
-import { MapPin,Clock } from "lucide-react-native";
+import { MapPin, Clock } from "lucide-react-native";
 import { View } from "react-native";
+import "../../../app/global.css"
+
+export const Skeleton = ({ className }: { className?: string }) =>
+  <View className={ ` rounded-lg animate-pulse bg-gray-200   ${className} ` } />
 
 export const GymPodCardSkeleton: React.FC = () => {
   return (
-    <View className="gym-card mb-4 border-none shadow-md">
+    <View className="  border-none shadow-lg bg-white p-3 rounded-2xl  w-full">
       <View className="relative w-full h-40 mb-3 rounded-xl overflow-hidden">
-        <View className="w-full h-full animate-pulse" />
+        <Skeleton className="w-full h-full animate-pulse" />
       </View>
-      <View className="space-y-2">
-        <View className="h-5 w-3/4" />
-        <View className="flex items-center">
+      <View className="gap-2 ">
+        <Skeleton className="h-5 w-3/4" />
+        <View className=" flex-row items-center gap-2">
           <MapPin className="w-3.5 h-3.5 mr-1 text-muted-foreground" />
-          <View className="h-4 w-2/3" />
+          <Skeleton className="h-4 w-2/3" />
         </View>
-        <View className="flex justify-between items-center mt-2">
-          <View className="flex items-center">
+        <View className=" flex-row justify-between items-center mt-0 ">
+          <View className=" flex-row items-center gap-2">
             <Clock className="w-3.5 h-3.5 mr-1 text-muted-foreground" />
-            <View className="h-4 w-16" />
+            <Skeleton className="h-4 w-16" />
           </View>
         </View>
       </View>

@@ -1,6 +1,10 @@
 {
   "name": "qadam-mobile",
   "main": "expo-router/entry",
+  "author": {
+    "name": "Shahriyor",
+    "email": "malikovshahriyor929@gmail.com"
+  },
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
@@ -61,7 +65,8 @@
     "react-native-webview": "13.13.5",
     "tailwindcss": "^3.4.17",
     "tamagui": "^1.132.15",
-    "zod": "^4.0.14"
+    "zod": "^4.0.14",
+    "expo-location": "~18.1.6"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

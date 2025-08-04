@@ -51,15 +51,16 @@ const HeaderWithProfile = () => {
 
   return (
     <View
-      className="flex-row items-center justify-between h-16 px-4 shadow  bg-white !rounded-b-lg sticky top-0 z-[999] safe-top"
+      className="flex-row items-center justify-between h-[60px] px-4  shadow-lg bg-white !rounded-b-lg sticky top-0 z-[999] safe-top"
       style={ {
         borderBottomEndRadius: 13,
-        borderBottomStartRadius: 13
+        borderBottomStartRadius: 13,
+        backgroundColor: "white"
       } }
     >
       <Pressable
         onPress={ () => router.push("/profile") }
-        className="flex-row items-center gap-3"
+        className="flex-row items-center gap-3 bg-white"
       >
         { userData && userData.avatarUrl == null ? (
           <View className="h-12 w-12 rounded-full border-2 border-gym-400">
@@ -86,7 +87,7 @@ const HeaderWithProfile = () => {
             <Text className="text-lg font-medium max-[345px]:hidden ml-2">👋</Text>
           </View>
 
-          <Text className="text-gray-500 w-[230px] truncate">{ quotes[index] }</Text>
+          <Text className="text-gray-500 w-[260px] truncate line-clamp-1">{ quotes[index] }</Text>
         </View>
       </Pressable>
       <View className="flex-row- flex-row justify-center"></View>

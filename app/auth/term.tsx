@@ -7,7 +7,7 @@ export const TermsAndConditions = () => {
   const { t } = useTranslation();
 
   return (
-    <View className="max-w-[450px] w-full mx-auto px-4 pt-2 space-y-2">
+    <View className="max-w-[450px] h-full w-full mx-auto px-4 pt-2 space-y-2 bg-white">
       <Pressable className="p-3 mt-10">
         <Link href={"/auth/login"}>
           <ArrowLeft />

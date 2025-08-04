@@ -1,140 +1,7 @@
-// import { Tabs } from 'expo-router';
-// import { Calendar, Dumbbell, Home, User } from 'lucide-react-native';
-// import { Pressable, Text, View } from 'react-native';
-// const TabBarIcon = ({
-//   focused,
-//   icon,
-//   title,
-// }: {
-//   focused: boolean;
-//   icon: (color: string) => React.ReactNode;
-//   title: string;
-// }) => {
-//   const color = focused ? "#2A2F35" : "#898989";
-//   // const containerClasses = ;
-//   return (
-//     <View
-//       key="tab-content"
-//       className={ ` gap-1 ${focused
-//         ? " items-center justify-center  min-w-[70px] w-full h-[50px]      "
-//         : " items-center justify-center !w-[60px]  "
-//         }` }
-//     >
-//       { icon(color) }
-//       {/* { focused && ( */ }
-//       <Text className={ `font-medium text-secondary   text-nowrap` } style={ {
-//         color
-//       } }>
-//         { title }
-//       </Text>
-//       {/* ) } */ }
-//     </View>
-//   );
-// };
-// export default function TabsLayout() {
-//   return (
-//     <Tabs
-//       screenOptions={ {
-//         tabBarShowLabel: false,
-//         tabBarStyle: {
-//           height: 90,
-//           paddingTop: 17,
-//           borderTopRightRadius: 30,
-//           borderTopLeftRadius: 30,
-//           elevation: 0,
-//           justifyContent: "space-between",
-//           alignItems: "center",
-//           // width: 350
-//         }
-//       } }
-//     >
-//       <Tabs.Screen name="index" options={ {
-//         title: 'Home',
-//         tabBarIcon: ({ focused, color, size }) => (
-//           <TabBarIcon
-//             focused={ focused }
-//             title='Home'
-//             icon={ (color) =>
-//               <Home size={ size } color={ color } />
-//             }
-//           />
-//         )
-//       } }
-
-//       />
-//       <Tabs.Screen name="explore" options={ {
-//         title: 'Explore',
-//         tabBarIcon: ({ focused, color, size }) => (
-//           <TabBarIcon
-//             focused={ focused }
-//             title='Explore'
-//             icon={ (color) =>
-//               <Dumbbell size={ size } color={ color } />
-//             }
-//           />
-//         )
-//       } }
-//       />
-//       <Tabs.Screen name="booking" options={ {
-//         title: 'Booking',
-//         tabBarIcon: ({ focused, color, size }) => (
-//           <TabBarIcon
-//             focused={ focused }
-//             title='Booking'
-//             icon={ (color) =>
-//               <Calendar size={ size } color={ color } />
-//             }
-//           />
-//         )
-//       } } />
-//       <Tabs.Screen name="profile" options={ {
-//         title: 'Profile',
-//         tabBarIcon: ({ focused, color, size }) => (
-//           <TabBarIcon
-//             focused={ focused }
-//             title='Profile'
-//             icon={ (color) =>
-//               <User size={ size } color={ color } />
-//             }
-//           />
-//         )
-//       } } />
-//     </Tabs>
-//   );
-// }
-
-
 import { Tabs } from 'expo-router';
+import { t } from 'i18next';
 import { Calendar, Dumbbell, Home, User } from 'lucide-react-native';
 import { Text, View, TouchableWithoutFeedback } from 'react-native';
-
-// const TabBarIcon = ({
-//   focused,
-//   icon,
-//   title,
-// }: {
-//   focused: boolean;
-//   icon: (color: string) => React.ReactNode;
-//   title: string;
-// }) => {
-//   const color = focused ? "#2A2F35" : "#898989";
-
-//   return (
-//     <View
-//       key="tab-content"
-//       className={ `gap-1 ${focused
-//         ? "items-center justify-center min-w-[70px] w-full h-[50px]"
-//         : "items-center justify-center !w-[60px]"}` }
-//     >
-//       { icon(color) }
-//       <Text className="font-medium text-secondary text-nowrap" style={ { color } }>
-//         { title }
-//       </Text>
-//     </View>
-//   );
-// };
-
-// ✅ Custom TabButton – bounce yo‘q
 
 const TabBarIcon = ({
   focused,
@@ -146,23 +13,20 @@ const TabBarIcon = ({
   title: string;
 }) => {
   const color = focused ? "#2A2F35" : "#898989";
-  // const containerClasses = ;
   return (
     <View
       key="tab-content"
       className={ ` gap-1 ${focused
-        ? " items-center justify-center  min-w-[70px] w-full h-[50px]      "
-        : " items-center justify-center !w-[60px]  "
+        ? " items-center justify-center  min-w-[100px] w-full h-[50px]      "
+        : " items-center justify-center min-w-[100px]  "
         }` }
     >
       { icon(color) }
-      {/* { focused && ( */ }
       <Text className={ `font-medium text-secondary   text-nowrap` } style={ {
         color
       } }>
         { title }
       </Text>
-      {/* ) } */ }
     </View>
   );
 };
@@ -181,27 +45,32 @@ export default function TabsLayout() {
         tabBarShowLabel: false,
         headerShown: false,
         tabBarStyle: {
-          height: 100,
-          paddingTop: 25,
+          height: 90,
+          paddingTop: 22,
           borderTopRightRadius: 30,
           borderTopLeftRadius: 30,
-          elevation: 0,
-          backgroundColor: "#fff",
+          borderColor: "#fff",
+          backgroundColor: "#ffffff",
           justifyContent: "space-between",
           alignItems: "center",
-          // position: "fixed",
+          position: "absolute",
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: -5 }, // tepaga shadow
+          shadowOpacity: 0.01,
+          shadowRadius: 20,
         },
-        tabBarItemStyle: {
-          backgroundColor: "#fff"
-        }
+        // tabBarItemStyle: {
+        //   backgroundColor: "transparent", // ✅ unnecessary white
+        // },
       } }
+
     >
       <Tabs.Screen
         name="index"
         options={ {
-          title: 'Home',
+          title: t('nav.home'),
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={ focused } title="Home" icon={ (color) => <Home color={ color } /> } />
+            <TabBarIcon focused={ focused } title={ t('nav.home') } icon={ (color) => <Home color={ color } /> } />
           ),
           tabBarButton: (props) => <CustomTabButton { ...props } />,
         } }
@@ -209,19 +78,20 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="explore"
         options={ {
-          title: 'Explore',
+          title: t('nav.explore'),
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={ focused } title="Explore" icon={ (color) => <Dumbbell color={ color } /> } />
+            <TabBarIcon focused={ focused } title={ t('nav.explore') } icon={ (color) => <Dumbbell color={ color } /> } />
           ),
           tabBarButton: (props) => <CustomTabButton { ...props } />,
         } }
+
       />
       <Tabs.Screen
         name="booking"
         options={ {
-          title: 'Booking',
+          title: t('nav.bookings'),
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={ focused } title="Booking" icon={ (color) => <Calendar color={ color } /> } />
+            <TabBarIcon focused={ focused } title={ t('nav.bookings') } icon={ (color) => <Calendar color={ color } /> } />
           ),
           tabBarButton: (props) => <CustomTabButton { ...props } />,
         } }
@@ -229,9 +99,9 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="profile"
         options={ {
-          title: 'Profile',
+          title: t('nav.profile'),
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={ focused } title="Profile" icon={ (color) => <User color={ color } /> } />
+            <TabBarIcon focused={ focused } title={ t('nav.profile') } icon={ (color) => <User color={ color } /> } />
           ),
           tabBarButton: (props) => <CustomTabButton { ...props } />,
         } }
