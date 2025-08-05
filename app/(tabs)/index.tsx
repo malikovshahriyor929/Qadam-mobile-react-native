@@ -68,7 +68,8 @@ const Mainpage = () => {
         className=' px-4  bg-white'
         contentContainerStyle={ {
           paddingBottom: 150,
-        } }>
+        } }
+        >
         <Link href={ "/explore" }>
           <View className="w-full">
             <CarouselWithLanguage />

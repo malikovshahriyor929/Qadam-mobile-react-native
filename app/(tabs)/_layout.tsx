@@ -54,6 +54,7 @@ export default function TabsLayout() {
           justifyContent: "space-between",
           alignItems: "center",
           position: "absolute",
+          zIndex: 888,
           shadowColor: "#000",
           shadowOffset: { width: 0, height: -5 }, // tepaga shadow
           shadowOpacity: 0.01,

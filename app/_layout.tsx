@@ -12,6 +12,7 @@ import tamaguiConfig from '../tamagui.config';
 import "./global.css";
 import { toastConfig } from "@/components/toastConfig";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { NavigationContainer } from "@react-navigation/native";
 export default function RootLayout() {
   const [isReady, setIsReady] = useState(false);
   const router = useRouter();
@@ -38,7 +39,6 @@ export default function RootLayout() {
   return (
     <TamaguiProvider config={ tamaguiConfig }>
       <QueryClientProvider client={ queryClient }>
-
         <I18nextProvider i18n={ i18next }>
           <SafeAreaView style={ { flex: 1, backgroundColor: '#fff' } } edges={ ['top', 'left', 'right'] }>
             <SafeAreaProvider>
@@ -46,7 +46,6 @@ export default function RootLayout() {
               <Stack >
                 <Stack.Screen name="(tabs)" options={ { headerShown: false } } />
                 <Stack.Screen name="auth" options={ { headerShown: false } } />
-                <Stack.Screen name="pages" options={ { headerShown: false } } />
               </Stack >
               <Toast config={ toastConfig } />
             </SafeAreaProvider>
