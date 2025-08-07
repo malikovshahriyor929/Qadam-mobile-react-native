@@ -1,4 +1,5 @@
-import {  usePathname, useRouter } from "expo-router";
+import { shadowLg } from "@/utils/shadow";
+import { usePathname, useRouter } from "expo-router";
 import { ArrowLeft } from "lucide-react-native";
 import { Pressable, Text, View } from "react-native";
 
@@ -21,8 +22,9 @@ const Header: React.FC<HeaderProps> = ({ title, showBackButton = false }) => {
 
   return (
     <View
-      className="flex-row items-center justify-between h-[60px] px-4  shadow-lg bg-white !rounded-b-lg sticky top-0 z-[999] safe-top"
+      className="flex-row items-center justify-between h-[60px] px-4  shadow bg-white !rounded-b-lg sticky top-0 z-[999] safe-top"
       style={ {
+        ...shadowLg,
         borderBottomEndRadius: 13,
         borderBottomStartRadius: 13,
         backgroundColor: "white"
@@ -36,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({ title, showBackButton = false }) => {
         <Text className="text-xl font-semibold max-w-[290px] max-[347px]:max-w-[250px] truncate line-clamp-1">{ title }</Text>
       </View>
       <View className="flex-row flex justify-center"></View>
-    </View>
+    </View >
   );
 };
 

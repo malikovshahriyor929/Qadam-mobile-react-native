@@ -1,6 +1,7 @@
 import HeaderWithProfile from '@/components/headerForHome';
 import CarouselWithLanguage from '@/components/home/carusel';
 import Location from '@/components/location';
+import { shadowLg } from '@/utils/shadow';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Link, useRouter } from 'expo-router';
 import { t } from 'i18next';
@@ -62,7 +63,7 @@ const Mainpage = () => {
 
 
   return (
-    <View className='bg-white'>
+    <View className='bg-white h-screen'>
       <HeaderWithProfile />
       <ScrollView
         className=' px-4  bg-white'
@@ -81,7 +82,7 @@ const Mainpage = () => {
             <Location />
           </View>
         </View>
-        <View className="border border-gray-100  shadow-lg bg-white p-4 rounded-2xl ">
+        <View style={shadowLg} className="shadow border border-gray-100   bg-white p-4 rounded-2xl ">
           <View className="">
             <View className=" flex-row items-center gap-2 mb-3">
               <Info size={ 20 } color={ "#2A2F35" } />

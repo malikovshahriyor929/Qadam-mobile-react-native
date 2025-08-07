@@ -9,6 +9,7 @@ import Toast from "react-native-toast-message";
 import { Image, Pressable, Text, TouchableOpacity, View } from "react-native";
 import MembershipName from "@/components/language";
 import { Sheet } from "tamagui";
+import { shadowLg } from "@/utils/shadow";
 const ITEMS_PER_PAGE = 5;
 
 export default function UpcomingBookings({
@@ -162,6 +163,7 @@ export default function UpcomingBookings({
         return (
           <View
             key={ i }
+            style={ shadowLg }
             className={ `bg-white mb-4 border-2 ${statusConfig.bg} rounded-2xl p-3 shadow` }
           >
             <View className="flex-row gap-4">
@@ -252,8 +254,9 @@ export default function UpcomingBookings({
         <View className="flex justify-center items-center mt-10 gap-2">
           <Pressable
             disabled={ currentPage === 1 }
+            style={ shadowLg }
             onPress={ () => setCurrentPage((p) => Math.max(1, p - 1)) }
-            className="inline-flex items-center justify-center w-11 h-11 max-[365px]:size-8 rounded-xl border-2 border-gray-200 bg-white text-gray-600 hover:bg-primary hover:text-primary-foreground hover:border-primary disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md"
+            className="inline-flex items-center justify-center w-11 h-11 max-[365px]:size-8 rounded-xl border-2 border-gray-200 bg-white text-gray-600 hover:bg-primary hover:text-primary-foreground hover:border-primary disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shadow"
           >
             <ChevronLeft className="w-5 h-5" size={ 20 } color={ "#4b5563" } />
           </Pressable>
@@ -270,10 +273,11 @@ export default function UpcomingBookings({
               ) : (
                 <Pressable
                   key={ idx }
+                  style={ shadowLg }
                   onPress={ () => setCurrentPage(Number(page)) }
-                  className={ `inline-flex items-center justify-center w-11 h-11 max-[365px]:size-8 rounded-xl text-sm font-semibold transition-all duration-200 ${currentPage === page
-                    ? "bg-primary text-primary-foreground shadow-lg  border-2 border-primary"
-                    : "bg-white border-2 border-gray-200 text-gray-700 hover:bg-primary/10 hover:border-primary/30 shadow-sm hover:shadow-md"
+                  className={ `inline-flex items-center justify-center w-11 h-11 max-[365px]:size-8 rounded-xl text-sm font-semibold transition-all shadow duration-200 ${currentPage === page
+                    ? "bg-primary text-primary-foreground   border-2 border-primary"
+                    : "bg-white border-2 border-gray-200 text-gray-700 hover:bg-primary/10 hover:border-primary/30 shadow"
                     }` }
                 >
                   <Text>
@@ -286,8 +290,9 @@ export default function UpcomingBookings({
 
           <Pressable
             disabled={ currentPage === totalPages }
+            style={ shadowLg }
             onPress={ () => setCurrentPage((p) => Math.min(totalPages, p + 1)) }
-            className="inline-flex items-center justify-center w-11 h-11 max-[365px]:size-8 rounded-xl border-2 border-gray-200 bg-white text-gray-600 hover:bg-primary hover:text-primary-foreground hover:border-primary disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md"
+            className="inline-flex items-center justify-center w-11 h-11 max-[365px]:size-8 rounded-xl border-2 border-gray-200 bg-white text-gray-600 hover:bg-primary hover:text-primary-foreground hover:border-primary disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200 shadow"
           >
             <ChevronRight className="w-5 h-5" size={ 20 } color={ "#4b5563" } />
           </Pressable>

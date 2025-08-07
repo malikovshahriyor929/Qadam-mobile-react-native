@@ -22,6 +22,8 @@ import Header from "@/components/headerforAll";
 import { Image, Pressable, Text, View } from "react-native";
 import { Avatar, AvatarFallback, AvatarImage, Button } from "tamagui";
 import { Skeleton } from "@/components/location/gymPodCard/skeleton";
+import PaymentType from "@/components/profile/paymentTypeDrawer";
+import { shadowLg } from "@/utils/shadow";
 // import { LuUserCog } from "react-icons/lu";
 interface Tariff {
   avatar: string;
@@ -167,10 +169,11 @@ const Profile = () => {
 
 
   return (
-    <View className=" flex-col min-h-screen pb-20">
+    <View className=" flex-col min-h-screen pb-20 bg-[#F9F8FB]">
       <Header title={ t("profile") } />
 
       <View className="px-4 py-4">
+        {/* profile */ }
         { !isLoading ? (
           <View className="flex-row items-center mb-6">
             {/* <input
@@ -200,82 +203,61 @@ const Profile = () => {
                 </View>
               )
             }
-            {/* </Avatar> */ }
-
             <View className="ml-4 max-[334px]:ml-2">
-              { userData ? (
-                <>
-                  <Text className="text-xl font-semibold max-[360px]:text-lg">
-                    { userData?.firstName + " " + userData?.lastName }
-                  </Text>
-                  <Text className="text-muted-foreground">
-                    { userData?.phoneNumber }
-                  </Text>
-                </>
-              ) : (
-                <>
-                  <Text className="text-xl font-semibold">
-                    <Skeleton className="w-full h-4 rounded-xl" />
-                  </Text>
-                  <Text className="text-muted-foreground">
-                    {/* { userData } */ }
-                  </Text>
-                </>
-              ) }
+              <Text className="text-xl font-semibold max-[360px]:text-lg">
+                { userData?.firstName + " " + userData?.lastName }
+              </Text>
+              <Text className="text-muted-foreground">
+                { userData?.phoneNumber }
+              </Text>
             </View>
           </View>
         ) : (
-          <>
-            <View className="flex-row items-center mb-6">
-              <Avatar className="h-16 w-16 border-2 border-gym-400">
-                <AvatarFallback>
-                  <Skeleton className="size-16 bg-black/20" />
-                </AvatarFallback>
-              </Avatar>
+          <View className="flex-row items-center mb-6">
+            <Skeleton className="size-[64px] rounded-[100%] bg-black/20" />
 
-              <View className="ml-4 max-[334px]:ml-2 w-[70%] space-y-2">
-                <Skeleton className="!w-[80%] bg-black/20 h-5 !rounded-lg " />
-                <Skeleton className="w-[65%] bg-black/20 h-3 !rounded-lg " />
-              </View>
+            <View className="ml-4 max-[334px]:ml-2 w-[70%] gap-2">
+              <Skeleton className="!w-[80%] bg-black/20 h-5 !rounded-[12px] " />
+              <Skeleton className="w-[65%] bg-black/20 h-4 !rounded-[12px] " />
             </View>
-          </>
+          </View>
         ) }
         { userData && !isLoading ? (
-          <View className="bg-white rounded-xl p-4 mb-4 max-[350px]:p-3 shadow-sm border border-border">
+          <View style={shadowLg} className="bg-white rounded-xl p-4 mb-4 max-[350px]:p-3 shadow border border-[#E4E4E7]">
             <View className="flex-row items-center">
-              <CreditCard className="h-10 w-10 max-[350px]:size-9 max-[350px]:mr-2 p-2 bg-primary/90  text-primary-foreground rounded-full mr-3" />
+              <View className="items-center justify-center  h-12 w-12 max-[350px]:size-9 max-[350px]:mr-2  bg-primary/90  text-primary-foreground rounded-full mr-3">
+                <CreditCard color={ "#D5FA48" } />
+              </View>
               <View>
-                <Text className="text-sm text-muted-foreground">
-                  <Text className="max-[355px]:hidden">
-                    { t("availableBalance") }
-                  </Text>
-                  <Text className="hidden max-[355px]:flex">
-                    { " " }
-                    { t("availableBalance2") }
-                  </Text>
+                <Text className="text-[14px] font-medium text-gray-600">
+                  { t("availableBalance") }
                 </Text>
 
-                <Text className="text-[20px] font-bold max-[422px]:text-lg max-[370px]:text-[15px] ">
-                  { Number(userData?.balance?.amount)
-                    .toLocaleString()
-                    .replace(",", " ")
-                    .replace(",", " ")
-                    .replace(",", " ") }{ " " }
-                  { t("currency") }
-                </Text>
+                <View className="flex-row gap-1 items-end">
+                  <Text className="text-[18px] font-black">
+                    { Number(userData?.balance?.amount)
+                      .toLocaleString()
+                      .replace(",", " ")
+                      .replace(",", " ")
+                      .replace(",", " ") } 
+                  </Text>
+                  <Text className="text-[18px] font-bold">
+                    { t("currency") }
+                  </Text>
+                </View>
               </View>
               <Pressable
                 onPress={ () => setOpenForTypePayment(true) }
-                className="ml-auto max-[370px]:!py-0.5 max-[370px]:px-2 border border-gray-400 "
+                className="ml-auto  p-2 px-3 rounded-xl bg-[#F9F8FB] border border-[#E4E4E7] "
               >
-                <Text>
+                <Text className="text-[16px]">
                   { t("addFunds") }
                 </Text>
               </Pressable>
             </View>
           </View>
         ) : (
-          <View className="bg-white rounded-xl p-4 mb-4 shadow-sm border border-border">
+          <View style={shadowLg} className="bg-white rounded-xl p-4 mb-4 shadow border border-border">
             <View className="flex-row items-center">
               <CreditCard className="h-10 w-10 p-2 bg-gym-400 text-primary-foreground rounded-full mr-2" />
               <View>
@@ -301,7 +283,7 @@ const Profile = () => {
         <View className="mb-4 p-3 rounded-xl border ">
           <View className="flex-row items-center p-3">
             <Pressable
-              onPress={ () => router.push("/(tabs)/profile/setting/index") }
+              onPress={ () => router.push("/(tabs)/profile/setting") }
               className="flex-row items-center justify-between w-full rounded-[12px] p-2 "
             >
               <View className="flex-row items-center gap-2">
@@ -332,7 +314,7 @@ const Profile = () => {
         <View className="mb-4 p-2 rounded-[12px] ">
           <View className="flex-row items-center p-3">
             <Pressable
-              onPress={ () => router.push("/(tabs)/profile/chat/index") }
+              onPress={ () => router.push("/(tabs)/profile/chat") }
               className="flex-row items-center justify-between w-full cursor-pointer "
             >
               <View className="flex-row items-center gap-2">
@@ -556,6 +538,50 @@ const Profile = () => {
         EditUser={ EditUser }
         refetch={ refetch }
       />
+      <InputDrawerForAdmin
+      setOpenForAdminReq={ setOpenForAdminReq }
+      openForAdminReq={ openForAdminReq }
+      />
+      <Drawer open={ openDrawerLog } onOpenChange={ setopenDrawerLog }>
+        <DrawerContent className="p-6 flex-row flex-col items-center text-center space-y-4 min-h-[300px]  z-[9999]">
+        <LogOut className="w-10 h-10 text-red-500" />
+        <Text className="text-lg font-semibold">{ t("logout_title") }</Text>
+        <p className="text-muted-foreground text-sm">
+        { t("logout_description") }
+        </p>
+        <div className="flex-row gap-3">
+        <Button
+        variant="outline"
+        onClick={ () => setopenDrawerLog(false) }
+        className="px-6"
+        >
+        { t("bookings.cancel") }
+        </Button>
+        <Button
+        variant="destructive"
+        onClick={ () => {
+                handleLogout();
+                setopenDrawerLog(false);
+                } }
+                className="px-6"
+            >
+            { t("logout2") }
+            </Button>
+            </div>
+            </DrawerContent>
+            </Drawer>
+            <InviteDrawer
+            data={ memberfip }
+            selectedUser={ selectedUser }
+            phoneDrawerOpen={ phoneDrawerOpen }
+            refetchMemberShip={ refetchMemberShip }
+            setPhoneDrawerOpen={ setPhoneDrawerOpen }
+            />
+            <TariffDrawer
+            data={ selectedTarif }
+            isOpenSelectedTarif={ isOpenSelectedTarif }
+            setIsOpenSelectedTarif={ setIsOpenSelectedTarif }
+            /> */}
       <PaymentType
         setAmountForPayment={ setAmountForPayment }
         amountForPayment={ amountForPayment }
@@ -564,50 +590,6 @@ const Profile = () => {
         setOpenForTypePayment={ setOpenForTypePayment }
         openForTypePayment={ openForTypePayment }
       />
-      <InputDrawerForAdmin
-        setOpenForAdminReq={ setOpenForAdminReq }
-        openForAdminReq={ openForAdminReq }
-      />
-      <Drawer open={ openDrawerLog } onOpenChange={ setopenDrawerLog }>
-        <DrawerContent className="p-6 flex-row flex-col items-center text-center space-y-4 min-h-[300px]  z-[9999]">
-          <LogOut className="w-10 h-10 text-red-500" />
-          <Text className="text-lg font-semibold">{ t("logout_title") }</Text>
-          <p className="text-muted-foreground text-sm">
-            { t("logout_description") }
-          </p>
-          <div className="flex-row gap-3">
-            <Button
-              variant="outline"
-              onClick={ () => setopenDrawerLog(false) }
-              className="px-6"
-            >
-              { t("bookings.cancel") }
-            </Button>
-            <Button
-              variant="destructive"
-              onClick={ () => {
-                handleLogout();
-                setopenDrawerLog(false);
-              } }
-              className="px-6"
-            >
-              { t("logout2") }
-            </Button>
-          </div>
-        </DrawerContent>
-      </Drawer>
-      <InviteDrawer
-        data={ memberfip }
-        selectedUser={ selectedUser }
-        phoneDrawerOpen={ phoneDrawerOpen }
-        refetchMemberShip={ refetchMemberShip }
-        setPhoneDrawerOpen={ setPhoneDrawerOpen }
-      />
-      <TariffDrawer
-        data={ selectedTarif }
-        isOpenSelectedTarif={ isOpenSelectedTarif }
-        setIsOpenSelectedTarif={ setIsOpenSelectedTarif }
-      /> */}
     </View>
   );
 };

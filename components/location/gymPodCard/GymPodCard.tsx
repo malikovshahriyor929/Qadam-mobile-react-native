@@ -6,6 +6,7 @@ import { HallType } from "@/types";
 import { Link, useLocalSearchParams } from "expo-router";
 import MembershipName from "@/components/language";
 import { Image, Text, View } from "react-native";
+import { shadowLg } from "@/utils/shadow";
 export interface GymPodProps {
   id: string;
   name: string;
@@ -64,9 +65,11 @@ const GymPodCard: React.FC<HallType> = ({
   return (
     <>
       <Link href={ `${connected ? `(tabs)/explore/gym/${id}` : pathname}` as any }>
-        <View className="relative shadow-lg bg-white p-3  rounded-2xl ">
+        <View
+          style={ shadowLg }
+          className="relative shadow  bg-white p-3  rounded-2xl ">
           <View
-            className={ ` border-none shadow-md
+            className={ ` border-none 
           
             `}
           >

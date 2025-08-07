@@ -55,10 +55,10 @@ export default function TabsLayout() {
           alignItems: "center",
           position: "absolute",
           zIndex: 888,
-          shadowColor: "#000",
-          shadowOffset: { width: 0, height: -5 }, // tepaga shadow
-          shadowOpacity: 0.01,
-          shadowRadius: 20,
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: 0 },
+          shadowOpacity: 0.09,
+          shadowRadius: 8,
         },
         // tabBarItemStyle: {
         //   backgroundColor: "transparent", // ✅ unnecessary white

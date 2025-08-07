@@ -1,10 +1,11 @@
+import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Myasxios } from "@/shared/generics";
 import { MapPin, Check, Loader2, Crown, Star } from "lucide-react-native";
 import { t } from "i18next";
 import { addDays } from "date-fns";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { Link, useLocalSearchParams, useRouter } from "expo-router";
 import { HallType, Membership2Type } from "@/types";
 import Toast from "react-native-toast-message";
 import MembershipName from "@/components/language";
@@ -15,7 +16,7 @@ import { Skeleton } from "@/components/location/gymPodCard/skeleton";
 import DateSelector from "@/components/gymDetails/dateSelect/DateSelector";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import GymCarousel from "@/components/gymDetails/carusel";
-import { Sheet } from "tamagui";
+import { Button, Sheet } from "tamagui";
 import FaceDrawer from "@/components/faceDrawer";
 
 function isTimeRangeAvailable(
@@ -575,6 +576,7 @@ const GymPodDetail = () => {
           <Sheet.Handle />
           <Sheet.Frame
             padding="$4"
+            space="$4"
             backgroundColor="$background"
             borderTopLeftRadius="$4"
             borderTopRightRadius="$4"
@@ -611,7 +613,7 @@ const GymPodDetail = () => {
                     style={ {
                       transform: [
                         {
-                          scale: selectMyTariffs === myMembership.id ? 1.00 : 0.95,
+                          scale: selectMyTariffs === myMembership.id ? 1.05 : 0.99,
                         }
                       ],
                       transitionDuration: "500ms",

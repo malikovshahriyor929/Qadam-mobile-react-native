@@ -79,7 +79,7 @@ const Bookings = () => {
           {
             tab === "upcoming" ?
               isLoading ? (
-                <SkeletonForBooking pages={ 10 } />
+                <SkeletonForBooking pages={ 4 } />
               ) : data?.available?.length ? (
                 <UpcomingBookings data={ data } refetch={ refetch } />
               ) : (

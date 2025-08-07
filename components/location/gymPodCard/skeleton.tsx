@@ -2,13 +2,17 @@ import React from "react";
 import { MapPin, Clock } from "lucide-react-native";
 import { View } from "react-native";
 import "../../../app/global.css"
+import { shadowLg } from "@/utils/shadow";
 
 export const Skeleton = ({ className }: { className?: string }) =>
   <View className={ ` rounded-lg animate-pulse bg-gray-200   ${className} ` } />
 
 export const GymPodCardSkeleton: React.FC = () => {
   return (
-    <View className="  border-none shadow-lg bg-white p-3 rounded-2xl  w-full">
+    <View
+      style={ shadowLg }
+      className="  border-none shadow bg-white p-3 rounded-2xl  w-full"
+    >
       <View className="relative w-full h-40 mb-3 rounded-xl overflow-hidden">
         <Skeleton className="w-full h-full animate-pulse" />
       </View>
