@@ -118,7 +118,7 @@ export interface Membership2Type {
 }
 
 export type HallType = {
-  connected: boolean;
+  connected?: boolean;
   id: number;
   name_eng: string;
   name_ru: string;

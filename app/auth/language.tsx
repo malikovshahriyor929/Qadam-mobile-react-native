@@ -35,7 +35,6 @@ const Language = () => {
       return router.push("/");
     }
   };
-  console.log(selectedLang, isSelected);
 
   return (
     <View className="flex justify-center items-center min-h-screen w-full bg-[#faf8fb]">

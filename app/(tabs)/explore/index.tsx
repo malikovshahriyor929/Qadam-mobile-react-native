@@ -110,12 +110,11 @@ const Explore = () => {
           } /> */}
           <View className="relative ">
             <View className=" absolute left-3 top-1/2 transform -translate-y-1/2">
-
               <Search size={ 16 } className=" text-muted-foreground w-4 h-4" />
             </View>
             <Input
               className="pl-10 !bg-transparent placeholder:capitalize "
-              bg={ "$colorTransparent"   }
+              bg={ "$colorTransparent" }
               pl={ 35 }
               value={ searchQuery }
               onChangeText={ setSearchQuery }

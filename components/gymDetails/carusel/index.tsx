@@ -42,37 +42,53 @@
 // };
 // export default GymCarousel;
 
-import { View, Image, Dimensions } from "react-native";
+import { View, Image } from "react-native";
 import Swiper from "react-native-swiper";
 import { HallType } from "@/types";
 
-const { width } = Dimensions.get("window");
 
 const GymCarousel = ({ images }: HallType) => {
-  if (!images || images.length === 0) return null;
 
   return (
-    <View style={{ height: 260, width: "100%" }}>
+    <View style={ { height: 260, width: "100%" } }>
       <Swiper
         autoplay
-        autoplayTimeout={4}
+        autoplayTimeout={ 5 }
         showsPagination
         loop
-        dotStyle={{ backgroundColor: "#ccc" }}
-        activeDotStyle={{ backgroundColor: "#000" }}
+        dotStyle={ { backgroundColor: "transparent" } }
+        activeDotStyle={ { backgroundColor: "#transparent" } }
+        className="gap-2 duration-300"
+
       >
-        {images.map((img, idx) => (
-          <Image
-            key={idx}
-            source={{ uri: `${process.env.EXPO_PUBLIC_BASE_URL}/files/${img.filename}` }}
-            style={{
-              width,
-              height: 260,
-              resizeMode: "cover",
-              borderRadius: 12,
-            }}
-          />
-        ))}
+        { images.map((img, idx) => (
+          <View
+            key={ idx }
+            style={ {
+              alignItems: "center",
+            } }
+          >
+            <Image
+              source={ { uri: `${process.env.EXPO_PUBLIC_BASE_URL}/files/${img.filename}` } }
+              style={ {
+                width: "100%",
+                height: 260,
+                borderRadius: 12,
+                resizeMode: "cover",
+              } }
+            />
+          </View>
+          // <Image
+          //   key={ idx }
+          //   source={ { uri: `${process.env.EXPO_PUBLIC_BASE_URL}/files/${img.filename}` } }
+          //   className="w-full h-[260px] object-cover object-center rounded-lg "
+          //   style={ {
+          //     height: 260,
+          //     resizeMode: "cover",
+          //     borderRadius: 12,
+          //   } }
+          // />
+        )) }
       </Swiper>
     </View>
   );

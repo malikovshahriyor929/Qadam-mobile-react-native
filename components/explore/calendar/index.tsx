@@ -125,36 +125,42 @@ const WeeklyCalendar = ({ timeSelection, setTimeSelection }: props) => {
         </button> */}
       </View>
 
-      <View className="flex-row gap-1 mb-2">
-        { generateWeekDays().map((dayISO) => {
-          const day = parseDate(dayISO);
-          return (
-            <Pressable
-              key={ dayISO }
-              onPress={ () => handleDateClick(dayISO) }
-              className={ `py-2 w-[45px] rounded justify-between   flex-col items-center
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={ false }
+        contentContainerStyle={ { gap: 5, paddingBottom: 8 } }
+        className="flex-row " >
+        <View className="flex-row gap-1 mb-2">
+          { generateWeekDays().map((dayISO) => {
+            const day = parseDate(dayISO);
+            return (
+              <Pressable
+                key={ dayISO }
+                onPress={ () => handleDateClick(dayISO) }
+                className={ `py-2 w-[45px] rounded-[12px] justify-between   flex-col items-center
                 ${selectedDate && isSameDay(day, parseDate(selectedDate))
-                  ? "bg-primary text-primary-foreground"
-                  : "hover:bg-gray-100"
-                }` }
-            >
-              <Text className={ `
+                    ? "bg-primary"
+                    : "hover:bg-gray-100"
+                  }` }
+              >
+                <Text onPress={ () => handleDateClick(dayISO) } className={ `
                 ${selectedDate && isSameDay(day, parseDate(selectedDate))
+                    ? " text-primary-foreground"
+                    : "hover:bg-gray-100"
+                  }` }>
+                  { formatDate(day, "EEE") }
+                </Text>
+                <Text className={ `${selectedDate && isSameDay(day, parseDate(selectedDate))
                   ? " text-primary-foreground"
                   : "hover:bg-gray-100"
-                }` }>
-                { formatDate(day, "EEE") }
-              </Text>
-              <Text className={ `${selectedDate && isSameDay(day, parseDate(selectedDate))
-                ? " text-primary-foreground"
-                : "hover:bg-gray-100"
-                }` }>
-                { formatDate(day, "d") }
-              </Text>
-            </Pressable>
-          );
-        }) }
-      </View>
+                  }` }>
+                  { formatDate(day, "d") }
+                </Text>
+              </Pressable>
+            );
+          }) }
+        </View>
+      </ScrollView>
 
       { selectedDate && (
         <View className="mt-1 ">
@@ -276,7 +282,7 @@ const WeeklyCalendar = ({ timeSelection, setTimeSelection }: props) => {
                 borderColor = "border-primary/90";
                 textColor = "!text-primary-foreground";
               } else if (isInRange) {
-                bgColor = "bg-primary/20";
+                bgColor = "bg-[#e5e7eb]";
                 borderColor = "border-primary/30";
               }
 
@@ -284,7 +290,7 @@ const WeeklyCalendar = ({ timeSelection, setTimeSelection }: props) => {
                 <Pressable
                   key={ timeISO }
                   onPress={ () => handleTimeClick(timeISO) }
-                  className={ `w-[30%] p-2 border rounded text-center ${bgColor} ${borderColor}` }
+                  className={ `w-[30%] rounded-[8px]  p-2 border text-center ${bgColor} ${borderColor}` }
                 >
                   <Text className={ `text-[14px] text-center ${textColor}` }>
                     { format(time, "HH:00") }

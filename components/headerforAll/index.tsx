@@ -1,4 +1,4 @@
-import { router, usePathname, useRouter } from "expo-router";
+import {  usePathname, useRouter } from "expo-router";
 import { ArrowLeft } from "lucide-react-native";
 import { Pressable, Text, View } from "react-native";
 
@@ -9,14 +9,14 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ title, showBackButton = false }) => {
-  const navigate = useRouter();
+  const router = useRouter();
   const location = usePathname();
 
   const handleBack = () => {
     if (location === "/") {
       return;
     }
-    router.back();
+    router.push("/(tabs)/explore");
   };
 
   return (
@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ title, showBackButton = false }) => {
             <ArrowLeft className="w-5 h-5" />
           </Pressable>
         ) }
-        <Text className="text-xl font-semibold max-w-[290px] max-[347px]:max-w-[250px] truncate">{ title }</Text>
+        <Text className="text-xl font-semibold max-w-[290px] max-[347px]:max-w-[250px] truncate line-clamp-1">{ title }</Text>
       </View>
       <View className="flex-row flex justify-center"></View>
     </View>

@@ -114,12 +114,16 @@ export function DrawerDialogDemo({
       open={ open }
       onOpenChange={ setOpen }
       dismissOnSnapToBottom
-      position={ position }
-      onPositionChange={ setPosition }
-      zIndex={ 999 }
+      // position={ position }
+      // onPositionChange={ setPosition }
+      // zIndex={ 999999999 }
+      forceRemoveScrollEnabled
+      modal
       animation="medium"
     >
-      <YStack padding="$4" gap="$3" bg="#fff" height="92%" className='bg-gray-300' >
+      <Sheet.Overlay />
+      <Sheet.Handle />
+      <YStack padding="$4" gap="$3" bg="#fff"  className='bg-gray-300' >
         <ScrollView className='h-full'>
           <Text fontSize="$6" fontWeight="bold">
             { t('filter') }

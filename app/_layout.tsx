@@ -12,7 +12,6 @@ import tamaguiConfig from '../tamagui.config';
 import "./global.css";
 import { toastConfig } from "@/components/toastConfig";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { NavigationContainer } from "@react-navigation/native";
 export default function RootLayout() {
   const [isReady, setIsReady] = useState(false);
   const router = useRouter();
