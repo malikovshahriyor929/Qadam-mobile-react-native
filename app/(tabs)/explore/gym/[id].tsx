@@ -1,11 +1,10 @@
-import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Myasxios } from "@/shared/generics";
 import { MapPin, Check, Loader2, Crown, Star } from "lucide-react-native";
 import { t } from "i18next";
 import { addDays } from "date-fns";
-import { Link, useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { HallType, Membership2Type } from "@/types";
 import Toast from "react-native-toast-message";
 import MembershipName from "@/components/language";
@@ -16,7 +15,7 @@ import { Skeleton } from "@/components/location/gymPodCard/skeleton";
 import DateSelector from "@/components/gymDetails/dateSelect/DateSelector";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import GymCarousel from "@/components/gymDetails/carusel";
-import { Button, Sheet } from "tamagui";
+import { Sheet } from "tamagui";
 import FaceDrawer from "@/components/faceDrawer";
 
 function isTimeRangeAvailable(
@@ -223,29 +222,10 @@ const GymPodDetail = () => {
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     refetch()
-    Toast.show({
-      type: "success",
-      text1: "successfully"
-    })
-    // Bu yerda API chaqirishing yoki ma'lumotlarni yangilashing mumkin
     setTimeout(() => {
       setRefreshing(false);
-    }, 2000);
+    }, 1000);
   }, []);
-  const scale = useSharedValue(0.99);
-
-  // useEffect(() => {
-  //   scale.value = withTiming(
-  //     selectMyTariffs === myMembership.id ? 1.05 : 0.99,
-  //     { duration: 500 }
-  //   );
-  // }, [selectMyTariffs]);
-
-  // const animatedStyle = useAnimatedStyle(() => {
-  //   return {
-  //     transform: [{ scale: scale.value }],
-  //   };
-  // });
 
   return (
     <ScrollView
@@ -256,15 +236,13 @@ const GymPodDetail = () => {
         <RefreshControl
           refreshing={ refreshing }
           onRefresh={ onRefresh }
-          colors={ ["#2A2F35"] } // Android loader rangi
-          tintColor="#2A2F35" // iOS loader rangi
-          title="Yangilanmoqda..." // iOS loader ostidagi text
+          colors={ ["#2A2F35"] }
+          tintColor="#2A2F35"
+          title="Yangilanmoqda..."
         />
       }
     >
       <View>
-
-
         { !isLoading && !data?.connected && (
           <View className=" absolute z-20 top-0 left-0 flex items-center flex-col gap-4 justify-center size-full">
             <Text className="text-2xl font-semibold text-red-500 text-center ">
@@ -368,9 +346,6 @@ const GymPodDetail = () => {
                 </Text>
               </Pressable>
             </View>
-            <Pressable className="mb-10" onPress={ () => setFaceOpen(true) }>
-              <Text>pressfor face</Text>
-            </Pressable>
           </ScrollView>
         </View>
 
@@ -600,7 +575,6 @@ const GymPodDetail = () => {
           <Sheet.Handle />
           <Sheet.Frame
             padding="$4"
-            space="$4"
             backgroundColor="$background"
             borderTopLeftRadius="$4"
             borderTopRightRadius="$4"
@@ -637,7 +611,7 @@ const GymPodDetail = () => {
                     style={ {
                       transform: [
                         {
-                          scale: selectMyTariffs === myMembership.id ? 1.05 : 0.99,
+                          scale: selectMyTariffs === myMembership.id ? 1.00 : 0.95,
                         }
                       ],
                       transitionDuration: "500ms",

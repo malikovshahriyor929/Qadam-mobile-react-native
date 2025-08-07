@@ -97,7 +97,6 @@ export function DrawerDialogDemo({
   setTimeSelection,
   refetch,
 }: DrawerDialogDemoProps) {
-  const [position, setPosition] = useState(0);
   const { t } = useTranslation();
 
   const handleSave = () => {

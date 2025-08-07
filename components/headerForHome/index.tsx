@@ -43,12 +43,9 @@ const HeaderWithProfile = () => {
   //   }
   //   router.back();
   // };
-
   const quotes = t("quotes", { returnObjects: true }) as string[];
-
   const date = new Date();
   const index = date.getDate() % quotes.length;
-
   return (
     <View
       className="flex-row items-center justify-between h-[60px] px-4  shadow-lg bg-white !rounded-b-lg sticky top-0 z-[999] safe-top"
@@ -62,14 +59,12 @@ const HeaderWithProfile = () => {
         onPress={ () => router.push("/profile") }
         className="flex-row items-center gap-3 bg-white"
       >
-        { userData && userData.avatarUrl == null ? (
-          <View className="h-12 w-12 rounded-full border-2 border-gym-400">
-            <Image
-              src={ `${BASE_URL}${userData.avatarUrl}` }
-              alt="asdasd"
-              className="object-cover "
-            />
-          </View>
+        { userData && userData?.avatarUrl !== null ? (
+          <Image
+            src={ `${process.env.EXPO_PUBLIC_BASE_URL}${userData?.avatarUrl}` }
+            alt="asdasd"
+            className="object-cover h-12 w-12 rounded-full border-2 border-gym-400 "
+          />
         ) : (
           <View className="h-12 w-12 rounded-full border-2 border-gym-400 items-center justify-center">
             <Text className="uppercase !text-black ">

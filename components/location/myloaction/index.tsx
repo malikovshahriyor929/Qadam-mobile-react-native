@@ -28,7 +28,7 @@ const LocationTracker = ({ setLocation }: Props) => {
           latitude: location.coords.latitude,
           longitude: location.coords.longitude,
         });
-      } catch (error) {
+      } catch  {
         setError("Failed to get location");
       }
     })();

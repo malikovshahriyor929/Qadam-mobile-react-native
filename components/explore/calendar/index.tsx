@@ -7,9 +7,7 @@ import {
   startOfDay,
   parseISO,
   formatISO,
-  isAfter,
   isBefore,
-  startOfWeek,
 } from "date-fns";
 import { uz, enUS, ru } from "date-fns/locale";
 import i18next from "i18next";
@@ -88,14 +86,7 @@ const WeeklyCalendar = ({ timeSelection, setTimeSelection }: props) => {
     }
   };
 
-  // Haftani oldinga/yana ortga siljitish
-  const navigateWeek = (direction: "prev" | "next") => {
-    setCurrentWeekStart(
-      addDaysToISO(currentWeekStart, direction === "prev" ? -7 : 7)
-    );
-    setSelectedDate(null);
-    setTimeSelection({ start: null, end: null, selectingStart: true });
-  };
+
 
   const timeSlots = generateTimeSlots();
 

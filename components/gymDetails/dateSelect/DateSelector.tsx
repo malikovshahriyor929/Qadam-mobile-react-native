@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { format, addDays, isSameDay } from "date-fns";
 import { Myasxios } from "@/shared/generics";
-import { toZonedTime, format as formats } from "date-fns-tz";
 import { Skeleton } from "@/components/location/gymPodCard/skeleton";
 import { Pressable, Text, View } from "react-native";
 import { ScrollView } from "tamagui";
