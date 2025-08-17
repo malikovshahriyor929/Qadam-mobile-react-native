@@ -1,15 +1,15 @@
 import { shadowLg } from "@/utils/shadow";
-import { usePathname, useRouter } from "expo-router";
+import { Href, usePathname, useRouter } from "expo-router";
 import { ArrowLeft } from "lucide-react-native";
 import { Pressable, Text, View } from "react-native";
 
 
 interface HeaderProps {
   title: string;
-  showBackButton?: boolean;
+  showBackButton?: Href;
 }
 
-const Header: React.FC<HeaderProps> = ({ title, showBackButton = false }) => {
+const Header: React.FC<HeaderProps> = ({ title, showBackButton = "/(tabs)" }) => {
   const router = useRouter();
   const location = usePathname();
 
@@ -17,7 +17,7 @@ const Header: React.FC<HeaderProps> = ({ title, showBackButton = false }) => {
     if (location === "/") {
       return;
     }
-    router.push("/(tabs)/explore");
+    router.push(showBackButton);
   };
 
   return (

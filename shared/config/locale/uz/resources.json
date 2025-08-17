@@ -330,5 +330,14 @@
     "agree": "Ro‘yxatdan o‘tish orqali <1>ushbu shartlarga</1> to‘liq rozilik bildirasiz.",
     "mustAgree": "Iltimos, ro‘yxatdan o‘tishdan oldin shartlarga rozilik bildiring."
   },
-  "sessionLimitError": "Tanlangan kunda 2 ta aktiv sessiondan ortiq yarata olmaysiz"
+  "sessionLimitError": "Tanlangan kunda 2 ta aktiv sessiondan ortiq yarata olmaysiz",
+  "gender": "Jins",
+  "genderPlaceholder": "Jinsni tanlang",
+  "male": "Erkak",
+  "female": "Ayol",
+  "title": "Sign Up",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "gender_updated": "Jins muvaffaqiyatli yangilandi",
+  "update_failed": "Yangilashda xatolik yuz berdi"
 }

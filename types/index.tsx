@@ -33,6 +33,7 @@ export interface userType {
     total: number;
     pages: number;
   };
+  gender?: string
 }
 export enum TransactionType {
   DEPOSIT = "deposit",

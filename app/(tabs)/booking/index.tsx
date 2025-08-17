@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Myasxios } from "@/shared/generics";
 import { t } from "i18next";
 import { Calendar } from "lucide-react-native";
-import { Text,} from "tamagui";
+import { Text, } from "tamagui";
 import { BookingType } from "@/types";
 import Header from "@/components/headerforAll";
 import SkeletonForBooking from "@/components/booking/skeleton";

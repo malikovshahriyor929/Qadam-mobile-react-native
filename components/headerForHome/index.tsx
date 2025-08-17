@@ -6,10 +6,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BASE_URL, Myasxios } from "@/shared/generics";
 import { Image, Pressable, Text, View } from "react-native";
 import { shadowLg } from "@/utils/shadow";
-// interface HeaderProps {
-//   title: string;
-//   showBackButton?: boolean;
-// }
 
 const HeaderWithProfile = () => {
   const router = useRouter();
@@ -78,7 +74,7 @@ const HeaderWithProfile = () => {
         <View className=" gap-0">
           <View className="flex-row items-center gap-1 ">
             <Text className="text-lg font-medium ">{ t("Hey") }, </Text>
-            <Text className="w-fit max-w-[260px] max-[423px]:max-w-[240px] max-[400px]:max-w-[200px] max-[380px]:max-w-[180px]  max-[370px]:max-w-[150px] max-[350px]:max-w-[150px]  truncate max-00px] text-lg font-medium  ">
+            <Text className="w-fit max-w-[260px] max-[423px]:max-w-[240px] max-[400px]:max-w-[200px] max-[380px]:max-w-[180px]  max-[370px]:max-w-[150px] max-[350px]:max-w-[150px]  truncate max-00px] text-lg font-medium line-clamp-1  ">
               { userData?.firstName } { userData?.lastName }
             </Text>
             <Text className="text-lg font-medium max-[345px]:hidden ml-2">👋</Text>

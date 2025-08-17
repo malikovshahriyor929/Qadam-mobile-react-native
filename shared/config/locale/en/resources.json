@@ -61,6 +61,10 @@
     "confirmPasswordRequired": "Please confirm your password",
     "passwordsMismatch": "Passwords do not match"
   },
+
+  "editprofile": {
+    "Edit profile": "Edit profile"
+  },
   "forgot": "Forgot password",
   "enter": "Send SMS",
   "resetPassword": "Reset Password",
@@ -329,5 +333,11 @@
     "agree": "By registering, you fully agree to the <1>terms and conditions</1>.",
     "mustAgree": "Please agree to the terms and conditions before signing up."
   },
-  "sessionLimitError": "You can't book more than 2 active sessions on the selected day"
+  "sessionLimitError": "You can't book more than 2 active sessions on the selected day",
+  "gender": "Gender",
+  "genderPlaceholder": "Select gender",
+  "male": "Male",
+  "female": "Female",
+  "gender_updated": "Gender updated successfully",
+  "update_failed": "Update failed"
 }

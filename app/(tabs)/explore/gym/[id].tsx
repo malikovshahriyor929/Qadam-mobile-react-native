@@ -263,7 +263,7 @@ const GymPodDetail = () => {
             "blur-sm opacity-60 overflow-hidden"}
           `}
         >
-          <Header title={ title } showBackButton />
+          <Header title={ title } showBackButton={"/(tabs)/explore"} />
           <ScrollView
             contentContainerStyle={ {
               paddingBottom: 0,

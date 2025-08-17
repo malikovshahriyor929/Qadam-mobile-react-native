@@ -38,19 +38,19 @@ const SkeletonForBooking = ({ pages = 5 }: Props) => {
       { skeletons.map((_, idx) => (
         <View
           key={ idx }
-          className="flex-row mb-4 items-center justify-between p-4 border rounded-[12px] bg-muted animate-pulse"
+          className="flex-row mb-4 items-center justify-between p-4 border border-gray-300 rounded-[12px] bg-muted animate-pulse "
         >
           <View className="flex-row items-center gap-3">
             <View className="flex-col gap-2">
-              <Skeleton className=" bg-black/30  w-24 h-[90px]  rounded-[10px]" />
-              <Skeleton className=" bg-black/30  h-8 w-full rounded-[10px]" />
+              <Skeleton className=" bg-black/30  w-24 h-[90px]  rounded-xl" />
+              <Skeleton className=" bg-black/30  h-8 w-full rounded-xl" />
             </View>
 
-            <View className=" flex-col gap-3 justify-between ">
-              <Skeleton className=" bg-black/30  h-5 w-36" />
-              <Skeleton className=" bg-black/30  h-4 w-32" />
-              <Skeleton className=" bg-black/30  h-3 w-20" />
-              <Skeleton className=" bg-black/30  h-8 w-full rounded-[10px]" />
+            <View className=" flex-col gap-2 justify-between ">
+              <Skeleton className=" bg-black/30 rounded-xl   h-8 w-48" />
+              <Skeleton className=" bg-black/30 rounded-xl  h-6 w-32" />
+              <Skeleton className=" bg-black/30 rounded-xl  h-5 w-20" />
+              <Skeleton className=" bg-black/30 h-8 mt-2 w-full rounded-xl" />
             </View>
           </View>
         </View>
