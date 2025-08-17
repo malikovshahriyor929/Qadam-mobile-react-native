@@ -95,21 +95,6 @@ const Mainpage = () => {
             </Text>
           </View>
         </View>
-        <Pressable onPress={ () => fn() }>
-          <Text>
-            clear local
-          </Text>
-        </Pressable>
-        <Pressable onPress={ () => fnl() }>
-          <Text>
-            clear langaueg
-          </Text>
-        </Pressable>
-        <Pressable onPress={ () => fnt() }>
-          <Text>
-            clear langaueg
-          </Text>
-        </Pressable>
       </ScrollView>
     </View>
   )

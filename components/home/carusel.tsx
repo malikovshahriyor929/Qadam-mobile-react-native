@@ -103,7 +103,8 @@ import { useTranslation } from "react-i18next";
 import { Myasxios } from "@/shared/generics";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useQuery } from "@tanstack/react-query";
-import { GymPodCardSkeleton } from "../location/gymPodCard/skeleton";
+import { GymPodCardSkeleton, Skeleton } from "../location/gymPodCard/skeleton";
+import { shadowLg } from "@/utils/shadow";
 
 const { width } = Dimensions.get("window");
 
@@ -145,8 +146,15 @@ export default function CarouselWithLanguage() {
 
   if (isLoading || !data) {
     return (
-      <View style={styles.wrapper}>
-        <GymPodCardSkeleton />
+      <View style={ styles.wrapper }>
+        <View
+          style={ shadowLg }
+          className="  border-none shadow bg-white p-3 rounded-2xl  w-full"
+        >
+          <View className="relative w-full h-40 mb-3 rounded-xl overflow-hidden">
+            <Skeleton className="w-full h-full animate-pulse" />
+          </View>
+        </View>
       </View>
     );
   }
@@ -156,32 +164,32 @@ export default function CarouselWithLanguage() {
   }
 
   return (
-    <View style={styles.wrapper}>
+    <View style={ styles.wrapper }>
       <Swiper
-        style={styles.swiper}
-        height={240}
-        width={width * 0.9}
+        style={ styles.swiper }
+        height={ 240 }
+        width={ width * 0.9 }
         autoplay
-        autoplayTimeout={3}
+        autoplayTimeout={ 3 }
         showsPagination
-        dotStyle={styles.dot}
-        activeDotStyle={styles.activeDot}
-        paginationStyle={styles.pagination}
+        dotStyle={ styles.dot }
+        activeDotStyle={ styles.activeDot }
+        paginationStyle={ styles.pagination }
         loop
       >
-        {data.map((item: CarouselItem, idx: number) => (
-          <View key={idx} style={styles.slide}>
+        { data.map((item: CarouselItem, idx: number) => (
+          <View key={ idx } style={ styles.slide }>
             <Image
-              source={{ uri: `${process.env.EXPO_PUBLIC_BASE_URL}/files/${item.file.filename}` }}
-              style={styles.image}
+              source={ { uri: `${process.env.EXPO_PUBLIC_BASE_URL}/files/${item.file.filename}` } }
+              style={ styles.image }
             />
-            <View style={styles.content}>
-              <Text style={styles.title}>{getLocalizedText(item, "name")}</Text>
-              <Text style={styles.subtitle}>{getLocalizedText(item, "miniDescription")}</Text>
-              <Text style={styles.desc}>{getLocalizedText(item, "description")}</Text>
+            <View style={ styles.content }>
+              <Text style={ styles.title }>{ getLocalizedText(item, "name") }</Text>
+              <Text style={ styles.subtitle }>{ getLocalizedText(item, "miniDescription") }</Text>
+              <Text style={ styles.desc }>{ getLocalizedText(item, "description") }</Text>
             </View>
           </View>
-        ))}
+        )) }
       </Swiper>
     </View>
   );

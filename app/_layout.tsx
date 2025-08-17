@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Stack, useRouter } from "expo-router";
+import { Stack, usePathname, useRouter } from "expo-router";
 import { Loader2 } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { I18nextProvider } from "react-i18next";
@@ -15,6 +15,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 export default function RootLayout() {
   const [isReady, setIsReady] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
   const [queryClient] = useState(() => new QueryClient());
   useEffect(() => {
     const checkFirstLaunch = async () => {
@@ -34,17 +35,19 @@ export default function RootLayout() {
         <Loader2 size={ 40 } color={ "#2A2F35" } />
       </View>
     )
-
+  const isChat = pathname.startsWith("/chat");
+  const backgroundColor = isChat ? "#2A2F35" : "#fff";
   return (
     <TamaguiProvider config={ tamaguiConfig }>
       <QueryClientProvider client={ queryClient }>
         <I18nextProvider i18n={ i18next }>
-          <SafeAreaView style={ { flex: 1, backgroundColor: '#fff' } } edges={ ['top', 'left', 'right'] }>
+          <SafeAreaView style={ { flex: 1, backgroundColor } } edges={ ['top', 'left', 'right'] }>
             <SafeAreaProvider>
-              <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
+              <StatusBar barStyle="dark-content" backgroundColor={ backgroundColor } />
               <Stack >
-                <Stack.Screen name="(tabs)" options={ { headerShown: false } } />
-                <Stack.Screen name="auth" options={ { headerShown: false } } />
+                <Stack.Screen name="(tabs)" options={ { headerShown: false, statusBarStyle: "dark" } } />
+                <Stack.Screen name="auth" options={ { headerShown: false, statusBarStyle: "dark" } } />
+                <Stack.Screen name="chat" options={ { headerShown: false, statusBarStyle: "light" } } />
               </Stack >
               <Toast config={ toastConfig } />
             </SafeAreaProvider>

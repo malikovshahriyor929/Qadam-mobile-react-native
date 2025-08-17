@@ -325,7 +325,7 @@ const Profile = () => {
             { role == "user" && (
               <View style={ shadowLg } className="bg-white rounded-xl p-2 mb-4 shadow border border-[#E4E4E7]  ">
                 <Pressable
-                  onPress={ () => router.push("/(tabs)/profile/chat") }
+                  onPress={ () => router.push("/chat") }
                   className="flex-row items-center justify-between w-full cursor-pointer p-2 "
                 >
                   <View className="flex-row items-center gap-2">

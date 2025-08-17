@@ -45,10 +45,10 @@ const Location = () => {
             <GymPodCard { ...value } />
           </View>
         ))
-        : Array(5)
+        : Array(2)
           .fill(1)
           .map((_, i) => (
-            <View key={ i }>
+            <View key={ i } className="mb-3">
               <GymPodCardSkeleton />
             </View>
           )) }
